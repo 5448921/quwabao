@@ -1,0 +1,182 @@
+/*重置样式*/
+html, body, div, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, ul, li, fieldset, form, label, input, legend, table, caption, tbody, tfoot, thead, tr, th, td, textarea, article, aside, audio, canvas, figure, footer, header, mark, menu, nav, section, time, video{
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-size: inherit;
+	font-weight: normal;
+}
+
+article, aside, dialog, figure, footer, header, hgroup, nav, section, blockquote{
+	display: block;
+}
+
+ul, ol{
+	list-style: none;
+}
+
+li{
+	list-style-type: none;
+}
+
+img{
+	vertical-align: top;
+	border: 0;
+	max-width: 100%;
+	height: auto;
+}
+
+blockquote, q{
+	quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after{
+	content: none;
+}
+
+table{
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+table, td, tr, th{
+	font-size: 12px;
+}
+
+address, cite, code , th, strong, em, i, var{
+	font-style: normal;
+	font-weight: normal;
+}
+
+input{
+	outline: 0;
+	outline: none;
+}
+
+input::-ms-clear{
+	display: none !important;
+}
+
+a:hover{
+	text-decoration: underline;
+}
+
+a:link, a:hover, a:visited{
+	text-decoration: none;
+}
+
+.clearfix{
+	*zoom: 1;
+}
+
+.clearfix:after{
+	display: block;
+	overflow: hidden;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+	content: ".";
+}
+
+/*公共*/
+body{
+	margin: 0;
+	padding: 0;
+	font: 12px/1.5 "Microsoft YaHei",helvetica,tahoma,arial,sans-serif;
+	background: #fff;
+	min-width: 1010px;
+}
+
+.mt50{
+	margin-top:50px;
+}
+.mt20{
+	margin-top:20px;
+}
+.mt30{
+	margin-top:30px;
+}
+
+.login-box{
+	position:absolute;
+	width:350px;
+	height:450px;
+	top:50%;
+	left:50%;
+	margin-left:-175px;
+	margin-top:-225px;
+}
+
+.login-box .logo-img{
+	width:120px;
+	height:105px;
+	background:url(../images/logo.png) no-repeat;
+	margin:0 auto;
+}
+.login-box .center-box{
+	width:320px;
+	margin:30px auto 0;
+}
+.login-box .center-box li.inp-box{
+	position:relative;
+	border:1px #ddd solid;
+	border-radius:2px;
+	background:#fff;
+	height:48px;
+	line-height:48px;
+}
+.login-box .center-box li.inp-box i{
+	width:20px;
+	height:20px;
+	position:absolute;
+	top:12px;
+	left:14px;
+}
+.login-box .center-box li.inp-box i.i-name{
+	background:url(../images/icon_name.png) center center no-repeat;
+}
+.login-box .center-box li.inp-box i.i-pwd{
+	background:url(../images/icon_pwd.png) center center no-repeat;
+}
+.login-box .center-box li.inp-box input{
+	width:270px;
+	font-size:14px;
+	color:#666;
+	padding-left:48px;
+	border:none;
+	line-height:46px;
+	height:46px;
+}
+.login-box .center-box li.tips-box{
+	position:relative;
+}
+.login-box .center-box li.tips-box .txt-box{
+	position:absolute;
+	width:100%;
+	left:0;
+	top:-35px;
+	text-align:center;
+	color:#aa0101;
+	line-height:20px;
+}
+.login-box .center-box li .btn-login{
+	width:100%;
+	height:48px;
+	border-radius:2px;
+	background:#aa0101;
+	text-align:center;
+	line-height:48px;
+	color:#fff;
+	font-size:16px;
+	display:block;
+}
+.login-box .bottom-txt{
+	text-align:center;
+	position:absolute;
+	bottom:20px;
+	left:0;
+	color:#999;
+	width:100%;
+}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/mvc
+      http://www.springframework.org/schema/mvc/spring-mvc.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop.xsd">
+	<!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射 -->
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+						<!-- 处理responseBody 里面日期类型 -->
+						<!--   <property name="dateFormat">
+                              <bean class="java.text.SimpleDateFormat">
+                                  <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
+                              </bean>
+                          </property>  -->
+						<!-- 为null字段时不显示 -->
+						<property name="serializationInclusion">
+							<value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
+						</property>
+					</bean>
+				</property>
+				<property name="supportedMediaTypes">
+					<list>
+							<value>text/html;charset=UTF-8</value>
+							<value>application/json; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<context:component-scan base-package="com.gedoumi">
+	</context:component-scan>
+
+
+
+	<!-- 使用默认servlet处理静态文件，过滤掉js、image、css等静态文件不由DispatchServlet 处理 -->
+	<mvc:default-servlet-handler/>
+	<mvc:resources location="/" mapping="/**/fonts/*"/>
+	<mvc:resources location="/" mapping="/**/*.css"/>
+	<mvc:resources location="/" mapping="/**/*.js"/>
+	<mvc:resources location="/" mapping="/**/*.png"/>
+	<mvc:resources location="/" mapping="/**/*.gif"/>
+	<mvc:resources location="/" mapping="/**/*.jpg"/>
+	<mvc:resources location="/" mapping="/**/*.jpeg"/>
+	<mvc:resources location="/" mapping="/**/*.ico"/>
+	<mvc:interceptors>
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/**" />-->
+			<!--<bean class="com.gedoumi.common.security.CrossDomainInterceptor"></bean>-->
+		<!--</mvc:interceptor>-->
+		<mvc:interceptor>
+			<mvc:mapping path="/v1/**" />
+			<mvc:exclude-mapping path= "/v1/login/**" />
+			<mvc:exclude-mapping path= "/api/v1/pfc/**" />
+			<mvc:exclude-mapping path= "/index" />
+			<bean class="com.gedoumi.common.security.ApiInterceptor"></bean>
+		</mvc:interceptor>
+
+
+
+	</mvc:interceptors>
+
+
+
+	<!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/view/" p:suffix=".jsp" />
+
+
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="filterMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"/>
+		<property name="maxUploadSize" value="1024000000"/>
+		<property name="uploadTempDir" value="upload/temp"/>
+	</bean>
+	
+	<aop:aspectj-autoproxy/> 
+	
+	<!--<bean id="myActionException" class="com.gedoumi.common.exception.MyActionException"/>-->
+	
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">  
+		<property name="order" value="1" />  
+	</bean>  
+	<bean id="jsonView" class="com.gedoumi.common.base.JsonView" />
+</beans>
